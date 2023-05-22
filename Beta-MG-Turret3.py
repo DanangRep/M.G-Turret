@@ -1,7 +1,3 @@
-### 
-### 
-### 
-
 try:
     import cv2
 except Exception as e:
@@ -146,7 +142,7 @@ class VideoUtils(object):
 
             # show the frame and record if the user presses a key
             if show_video:
-                cv2.imshow("Security Feed", frame)
+                cv2.imshow("Jendela Kamera (Danang Ganteng)", frame)
                 key = cv2.waitKey(1) & 0xFF
 
                 # if the `q` key is pressed, break from the lop
@@ -201,15 +197,15 @@ class Turret(object):
         Waits for input to calibrate the turret's axis
         :return:
         """
-        print ("Please calibrate the tilt of the gun so that it is level. Commands: (w) moves up, " \
-              "(s) moves down. Press (enter) to finish.\n")
+        print ("Kalibrasi gerak Tilt agar senjata sejajar dengan kamera. Commands: (w) gerak keatas, " \
+              "(s) gerak kebawah. Tekan (enter) untuk selesai.\n")
         self.__calibrate_y_axis()
 
-        print ("Please calibrate the yaw of the gun so that it aligns with the camera. Commands: (a) moves left, " \
-              "(d) moves right. Press (enter) to finish.\n")
+        print ("Kalibrasi gerak Pan agar senjata sejajar dengan kamera. Commands: (a) gerak kekiri, " \
+              "(d) gerak kekanan. Tekan (enter) untuk selesai.\n")
         self.__calibrate_x_axis()
 
-        print ("Calibration finished.")
+        print ("Pengkalibrasian selesai.")
 
     def __calibrate_x_axis(self):
         """
@@ -237,7 +233,7 @@ class Turret(object):
                         break
 
             except (KeyboardInterrupt, EOFError):
-                print ("Error: Unable to calibrate turret. Exiting...")
+                print ("Error: Gagal mengkalibrasi turret. keluar...")
                 sys.exit(1)
 
     def __calibrate_y_axis(self):
@@ -266,7 +262,7 @@ class Turret(object):
                         break
 
             except (KeyboardInterrupt, EOFError):
-                print ("Error: Unable to calibrate turret. Exiting...")
+                print ("Error: Gagal mengkalibrasi turret. Keluar...")
                 sys.exit(1)
 
     def motion_detection(self, show_video=False):
@@ -341,7 +337,7 @@ class Turret(object):
         Turret.move_forward(self.sm_x, 1)
         Turret.move_forward(self.sm_y, 1)
 
-        print ('Commands: Pivot with (a) and (d). Tilt with (w) and (s). Exit with (q)\n')
+        print ('Commands: Kendali Pan dengan (a) dan (d). Tilt dengan (w) dan (s). Keluar dengan (q)\n')
         with raw_mode(sys.stdin):
             try:
                 while True:
@@ -414,7 +410,7 @@ class Turret(object):
 if __name__ == "__main__":
     t = Turret(friendly_mode=False)
 
-    user_input = input("Choose an input mode: (1) Motion Detection, (2) Interactive\n")
+    user_input = input("Pilih mode input : (1) Motion Detection, (2) Interactive \n")
 
     if user_input == "1":
         t.calibrate()
@@ -427,4 +423,4 @@ if __name__ == "__main__":
             _thread.start_new_thread(VideoUtils.live_video, ())
         t.interactive()
     else:
-        print ("Unknown input mode. Please choose a number (1) or (2)")
+        print ("Mode Input tidak diketahui. Pilihlah mode (1) atau (2)")
